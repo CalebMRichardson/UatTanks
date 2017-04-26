@@ -1,0 +1,37 @@
+- The Stickler -
+	The Stickler will follow the waypoints incrementally
+		i.e
+		   if (location == currentWayPoint)
+	           {
+                       currentWayPoint++;
+                   }
+- The StickInTheMud -
+	The Stick in the mud will only patrol between two waypoints
+		i.e
+		   if (location == currentWayPoint)
+                   {
+                       if (currentWayPoint == firstWayPoint)
+                       {
+                          currentWayPoint++; 
+                       }
+                       else
+		       {
+                           currentWayPoint = firstWayPoint; 
+		       }
+                   } 
+
+- The Creep -
+	When the creep gets to the current waypoint he will check to see where the player is and then move to that position
+		i.e 
+	          if (location == currentWayPoint)
+		  {
+		     currentWayPoint == FindClosestWayPoint(player.position); 
+		  }
+
+- The Loose Cannon - 
+	The Loose Cannon will grab a random waypoint every time it gets to the current waypoint.
+		i.e 
+                    if (loaction == currentWayPoint)
+		    {
+			currentWayPoint = RandomWayPoint();
+                    }

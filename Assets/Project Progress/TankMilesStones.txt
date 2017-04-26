@@ -1,0 +1,199 @@
+
+-------------------Milestone 1 Requirements-------------------
+
+- The player tank is now able to move, shoot, and destroy (stationary) enemy tanks in a more complex environment.
+	- XX__ The "floor" of the game world is made from a series of cubes that are 20m x 20m x 1m in size.
+	- XX__ A collection of other cubes or other meshes have been placed in the world as obstacles for the player to hide behind.
+
+- XX__ The player uses the WASD keys to drive the tank.
+	- XX__ The player will press W to move forward, S to move in reverse, and A & D to turn left and right.
+		- XX__ The speed at which the player moves forward is available for designers to edit in the inspector and is in meters per second.
+		- XX__ The speed at which the player moves backwards is available for designers to edit in the inspector and is in meters per second.
+		- XX__ The speed at which the player rotates is available for designers to edit in the inspector and is in degrees per second.
+
+- The player will press the space bar to fire a "shell" in the direction their tank is facing.
+	- XX__ The player's fire rate is limited. Designers can set the number of seconds between shots in the inspector.
+	- XX__ The firing of shells uses Unity's Rigidbody physics system.
+	- XX__ The amount of force at which the "shell" is pushed is available for designers to edit in the inspector.
+	- XX__ The shells are able to hit and destroy enemy tanks. (These enemy tanks do not need to move... yet.)
+		- XX__ The amount of damage done by a shell is a property of the entity firing the shell and can be edited by designers in the inspector.
+		- XX__ The max health of a tank (both player tanks and enemy tanks) is available for designers to edit in the inspector.
+		- XX__ When a tank's health falls below zero, the tank is destroyed.
+	- XX__ Shells are destroyed when they hit any target, or after a timeout period that can be set by designers in the inspector.
+	- XX__ The player's tank will use an "Input Controller" component to send messages to components that perform other tasks, such as movement and firing.
+	- XX__ The player's tank will use a "Tank Data" component to hold all data about the tank.
+
+- XX__ Enemy Tanks
+	- XX__ Enemy tanks do not need to move (yet), however, they also need to be able to fire at a regular rate.
+	- XX__ Except for an "AI Controller" component that sends messages to the other components, enemy tanks should use the same components as player tanks.
+
+- Each player tracks her own score
+	- This value does not have to be displayed on screen (yet) but must be visible in the inspector during testing.
+	- XX__ The point value for destroying a tank is a property of each tank and is available for designers to set in the inspector.
+
+- XX__ There is a Game Manager singleton that keeps track of important game data and manages the flow of the game.
+
+- XX__ Your code must be well commented and your project well organized.
+
+-------------------Milestone 2 Requirements-------------------
+
+- XX__ Your game must now include AI enemy tanks.
+	- XX__ AI Tanks should use similar graphics to the player tank, but be visibly different in some way.
+	- XX__ AI Tanks must use the same motor and shooter components as the player tanks, but be controlled instead by an AI Controller component.
+
+- XX__ The AI Controller must have the following controls available for designers to tweak:
+	- XX__ The distance at which a tank can “hear” a player
+	- XX__ The FOV angle the tank can “see” at
+	- XX__The FOV angle that determines if the tank has the player “in their sights.”
+	- XX__ An array for the patrol points the tank will follow if it is in a patrol state.
+	- XX__ An enum variable that allows designers to select the “Personality” (State Machine) for the Tank.
+		- XX__ There must be at least 4 different personalities to choose from.
+		- XX__ At least one tank with each personality must exist in your game.
+		- XX__ These personalities MUST be described in a .txt document in your project
+		- XX__ Each personality MUST visibly change the tank in some way.
+		- XX__ While not every “personality” needs to perform all these tasks, each of the following tasks must be performed at least once in your program.
+			- XX__ At least one tank must navigate through the world maze (built from cubes and box colliders) by use of waypoints.
+			- XX__ At least one tank must use the “patrol, rotate on hearing, stop on sight, fire when in sights” code from class.
+			- XX__ At least one tank must, at some point, chase the player with appropriate obstacle avoidance.
+			- XX__ At least one tank must, at some point, flee from the player with appropriate obstacle avoidance
+
+-------------------Milestone 3 Requirements-------------------
+
+- XX__ You must include a “Map Generator” object.
+	- XX__ This class has a “GenerateMap” function that will generate a map for the game.
+	- XX__ The map it generates must be adjustable by the designers (rows x col`s).
+	- XX__ There must be at least 3 source segments that come together to form the final map.
+		- XX__ Segments are chosen randomly.
+		- XX__ Players must be able to reach any tile in the map from any other tile in the map. There can be no "lost" tiles.
+	- XX__ There must be an exposed variable for the randomization seed to be set by a designer.
+	- XX__ There must ALSO be a flag that designers can choose that, if true, will generate the “level of the day” -- a different level each day.
+	- XX__ The array of map segment prefabs that the generator chooses from must be exposed for designers to add segments to the generator.
+
+- XX__ Each section must contain at least one AI tank spawn point.
+	- XX__ The GameManager should spawn 4 AI tanks, each with a different personality, at random spawn points.
+	- XX__ AI tanks do not need to patrol between sections. It is okay if they stay in their section.
+
+- Each section must contain at least one powerup spawn.
+	- After a powerup is picked up, it will respawn again in X seconds - X is adjustable by designers in the inspector.
+	- XX__ Both player and AI units must be able to pickup powerups/pickups and the effects of those powerups must apply to the unit that picked them up.
+	- XX__ There must be at least 3 different pickup types.
+	- XX__ At least one pickup must expire over time.
+	- XX__ At least one pickup is a permanent change to stats.
+
+- XX__ Each section must contain a playerSpawn empty game object
+	- The GameManager should cause the player to spawn at a random one of the playerSpawn locations each time the player dies.
+
+- XX__ Gameplay must work as it does in previous milestones
+	- XX__ Look at ALL previous milestones for their requirements!
+
+-------------------Milestone 4 Requirements-------------------
+
+- XX__ Start Screen
+	- XX__ The start screen contains buttons for the options screen or to start the game.
+
+- Game Over Screen
+	- The Game Over screen shows when all players have lost all their lives.
+		- XX__ The starting number of lives for a player is exposed in the inspector to be set by designers.
+	- XX__ XX__ The Game Over screen has a button to restart the game
+		- XX__ Restarting the game resets all variables for the game.
+	- The Game Over screen shows the players final score and the high score for the game.
+		- The high score persists between sessions (if the player closes the game and restarts, the high score stays.)
+
+- UI
+	- XX__ The players score and number of lives remaining are displayed on the screen.
+	- XX__ In Multiplayer mode, each player sees their own score and number of lives remaining.
+
+- XX__ Options Menu
+	- XX__ The following options are available for users to choose (either from the options or from the main menu):
+		- XX__ Whether to use the map of the day, or a random map
+		- XX__ Sound effects volume level
+		- XX__ Music volume level
+		- XX__ One or Two players
+
+- Sounds
+	- XX__ Menu Music – Music that plays when the player is in the menu, controlled by “Music Volume” option.
+	- XX__ Game Background Music – Music that plays when the player is in the game, controlled by “Music Volume” option.
+	- XX__ Tank Fire Sound – that fires when any Tank shoots, controlled by “FX Volume” option and occurs at the tank cannon location
+	- XX__ Tank Death Sound – sound that occurs when a tank dies, controlled by “FX Volume” option and occurs at location of tank death.
+	- XX__ Bullet Hit Sound - sound that plays when a bullet hits a target, controlled by "FX Volume" option and occurs at location of hit.
+	- XX__ Pickup Sounds – a sound that occurs when a pickup is picked up, controlled by “FX Volume” option and occurs at the location of the pickup
+	- XX__ Button click sounds - sounds that occur when a GUI button is pressed down and another when it is released, controlled by "FX Volume" option.
+
+- XX__ Split-Screen Multiplayer
+	- XX__If Two-Player mode is chosen from the main menu, the game plays in a split screen multiplayer mode.
+
+-------------------Milestone 5 Requirements-------------------
+
+- XX__ Main Menu
+	- XX__ There is a main menu that allows the user to move to the options screen or start the game.
+
+- XX__ Options Menu
+	- XX__ Options are available for users to choose from the options menu:
+	- XX__ Whether to use the map of the day, or a random map
+	- XX__ Sound effects volume level
+	- XX__ Music volume level
+	- XX__ One or Two players - these must toggle, only one can be selected at a time
+		- XX__ Note: You could also have two buttons on the start screen - the important part is that the player can choose 1 or 2 player.
+	- XX__ Your game must now save and load the game preferences to persist between sessions.
+
+- XX__ Player Data
+	- XX__ Our designers need to be able to adjust the following values for the tank:
+	- XX__ the amount of damage done by the tank
+	- XX__ the tank’s fire rate
+	- XX__ the amount of force a tank’s bullet is “thrown” with
+	- XX__ the speed at which the tank can rotate
+	- XX__ the max health of the tank
+
+- XX__ Enemies and AI
+	- XX__ AI Tanks contain an enum variable that allows designers to select the “Personality” (State Machine) for the Tank. There must be at least 4 different personalities to choose from.
+		Tanks should look visibly different depending on which personality type they have.
+	- All 4 AI tanks are on the map at all times – when one dies, it respawns at a random enemy spawn.
+	- While not every “personality” needs to perform all these tasks, each of the following tasks must be performed at least once in your program:
+		- At least one tank must navigate through the world maze by use of waypoints.
+		- At least one tank must use the “rotate on hearing, fire on sight” code from our homework assignments.
+		- At least one tank must, at some point, chase the player with appropriate obstacle avoidance.
+		- At least one tank must, at some point, flee from the player with appropriate obstacle avoidance.
+
+- XX__ The tank controller must have the following controls available for designers to tweak:
+		- XX__ The distance at which a tank can “hear” a player
+		- XX__ The FOV angle the tank can “see” at
+		- XX__ The FOV angle that a tank has the player "in its sights"
+		- XX__ An array for the patrol points the tank will follow if in patrol state
+
+- Sounds
+	- Your game must play the following sounds:
+	- XX__ Menu Music – Music that plays when the player is in the menu, controlled by “Music Volume” option.
+	- XX__ Game Background Music – Music that plays when the player is in the game, controlled by “Music Volume” option.
+	- XX__ Tank Fire Sound – that fires when any Tank shoots, controlled by “FX Volume” option.
+	- XX__ Tank Death Sound – sound that occurs when a tank dies, controlled by “FX Volume” option.
+	- XX__ Pickup Sounds – a sound that occurs when a pickup is picked up, controlled by “FX Volume” option.
+
+- Pickups and Powerups
+	- XX__ There must be at least 3 different pickup types.
+	- XX__ At least one must be temporary. At least one must be permanent.
+	- XX__ Powerups respawn X seconds after being picked up - X is exposed to designers.
+	- XX__ Both player and AI units must be able to pickup powerups/pickups and the effects of those powerups must apply to the unit that picked them up.
+
+- Procedural Generation
+	- XX__ You must include a “Map Generator” object that generates a procedural map for the game, as per our previous assignments.
+	- XX__ In the options for the game, players can choose between a Map of the Day and a Random Map.
+	- XX__ There must be at least 3 source segments that come together to form the final map.
+	- XX__ The array of map segment prefabs that the generator chooses from must be exposed for designers to add segments to the generator.
+	- XX__ AI tanks do not need to patrol between sections. It is okay if they stay in their section.
+
+- XX__Splitscreen Multiplayer
+	- XX__ If Two-Player mode is chosen from the main menu, the game plays in a split screen multi-player mode.
+
+- XX__ Animations
+	- XX__ Your game must utilize the Unity Animation system in at least 3 areas. These areas could be cosmetic or gameplay related.
+
+- Score/High Score
+	- The player(s)’s score(s) displays on the game screen.
+	- The high score for all players of the game is stored and is displayed on the game screen.
+	- The high score must persist through closing and reloading the game.
+
+- XX__ Win / Lose
+	- XX__ The player loses when they are out of lives. Designers must be able to set the number of lives for a player.
+
+- XX__ Organization
+	- XX__ Your code must be well commented and your project well organized.
